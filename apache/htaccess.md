@@ -1,0 +1,3 @@
+The `.htaccess` file is a configuration file for the apache server. It provides controle over multiple facets of web pages that are served by apache, including managing redirects, hotlink protection...
+
+> More than one `.htaccess` file can exist, but each directory can have one. If not protected properly the file can be tampered with. 
