@@ -8,12 +8,36 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4035e0dac88a0fca",
+            "id": "ee21e1f687a58f73",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Structure de fichier.md",
+                "file": "frameworks/laravel/The Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5b508ea638b3554b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frameworks/laravel/The Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "468fbbbb3e101de8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "frameworks/laravel/The Basics.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "f4566c9a4c095508",
@@ -86,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Structure de fichier.md",
+                "file": "frameworks/laravel/The Basics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +126,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Structure de fichier.md",
+                "file": "frameworks/laravel/The Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +149,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Structure de fichier.md"
+                "file": "frameworks/laravel/The Basics.md"
               }
             }
           }
@@ -147,17 +170,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4035e0dac88a0fca",
+  "active": "ee21e1f687a58f73",
   "lastOpenFiles": [
-    "Structure de fichier.md",
+    "frameworks/laravel/Introduction.md",
+    "frameworks/laravel/The Basics.md",
+    "().md",
+    "Tech Talks/Structure de fichier.md",
     "prog-lang/php/Form Validation.md",
-    "ctype_alnum.md",
+    "prog-lang/php/ctype_alnum.md",
     "prog-lang/php/Password Hashing.md",
     "prog-lang/php/date.md",
     "prog-lang/php/Sessions.md",
-    "prog-lang/php/PDO.md",
-    "prog-lang/php/Faker.md",
-    "().md",
-    "prog-lang/php/header.md"
+    "prog-lang/php/PDO.md"
   ]
 }
