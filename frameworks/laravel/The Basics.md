@@ -17,6 +17,7 @@
 	- [Defining a master layout](#defining\a\master\layout)
 - [Components](#components)
 	- [Rendering components](#rendering\components)
+	- [Casing](#casing)
 	- 
 ---
 
@@ -281,4 +282,81 @@ php artisan make:component Forms/Input
 
 ```
 <x-alert type="error" :message="$message"/>
+```
+
+- The data required by components should be defined in their class constructor
+- Public properties of a component will automatically be available to the component's view
+- It's unnecessary to pass data to the view from the componenet's `render` method
+
+```php
+<?php
+ 
+namespace App\View\Components;
+ 
+use Illuminate\View\Component;
+ 
+class Alert extends Component
+{
+    /**
+     * The alert type.
+     * @var string
+     */
+    public $type;
+ 
+    /**
+     * The alert message.
+     * @var string
+     */
+    public $message;
+ 
+    /**
+     * Create the component instance.
+     *
+     * @param  string  $type
+     * @param  string  $message
+     * @return void
+     */
+    public function __construct($type, $message)
+    {
+        $this->type = $type;
+        $this->message = $message;
+    }
+ 
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\View\View|\Closure|string
+     */
+    public function render()
+    {
+        return view('components.alert');
+    }
+}
+```
+
+- when the component is rendered, we can display the contents of its public variables by echoing the variables by name:
+
+```
+<div class="alert alert-{{ $type }}">
+    {{ $message }}
+</div>
+```
+
+## Casing
+- Component constructor arguments should written using _camelCase_
+- When referencing the argument names in the HTML attributes, _kebab-case_ should be used.
+```php
+/**
+ * Create the component instance.
+ *
+ * @param  string  $alertType
+ * @return void
+ */
+public function __construct($alertType)
+{
+    $this->alertType = $alertType;
+}
+```
+```
+<x-alert alert-type="danger" />
 ```
