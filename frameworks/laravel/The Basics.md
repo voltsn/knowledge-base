@@ -5,8 +5,17 @@
 	- ==[Facades](#facades)
 	- [HTTP Definition](#http\definition)
 	- [Example](#example)
+- [Views](#views)
+- [Controllers](#controllers)
+	- [Setup](#setup)
+	- [Referencing route to a controller](#referencing\route\to\a\controller)
+	- 
+	
+
+---
 
 # Files and Folders
+
 | Folder | Description |
 |---------|-------------|
 |app| Holds the base code of the application|
@@ -32,10 +41,10 @@
 Routes are the main entrance of a Laravel application. When we create a route, we call its controller and a specific action. A list of all available routes can be seen with the following command: `php artisan route:list` 
 
 ## Facades
-Facades provide a _static_ interface to classes that are available in the application's service container, Laravel ships with multiple facades that provide access to almost all of its features. They serve aas _static proxies_ to underlying classes in the service container.
+Facades provide a _static_ interface to classes that are available in the application's service container, Laravel ships with multiple facades that provide access to almost all of its features. They serve as _static proxies_ to underlying classes in the service container.
 
 ## HTTP Definition
-HTTP defines a set of request methods to indicate the desired action to be performed for a given resouce, they are sometimes reffered to as HTTP verbs. Each one of the them implements a different action however some common features are shared among them: a request method can be safe, ==idempotent==, or cacheable.
+HTTP defines a set of request methods to indicate the desired action to be performed for a given resouce, they are sometimes reffered to as HTTP verbs. Each one of the them implements a different action however some common features are shared among them. A request method can be safe, ==idempotent==, or cacheable.
 
 ## Example
 ```php
@@ -56,3 +65,61 @@ Route::get('/article/edit/{post:id}',function($id){
     ...
 });
 ```
+
+# Views
+Views are the files that all users will see from our app. The views are called only with the _HTTP get_ request.
+
+```
+|-resources
+    |-views
+        |-article
+          index.blade.php
+          show.blade.php
+          create.blade.php  
+```
+```php
+// Show each article by its id
+Route::get('/article/show/{post:id}',function($id){
+    return view('article.edit',['id' => $id]);
+});
+```
+
+## Passing arguments to views
+Arguments can be passed to a view like so:
+
+```php
+Route::get('/hello/{name}',function($name){
+    return view('hello',compact('name'));
+});
+```
+
+As seen in the example above arguments are _transfered_ to a view using the `compact()` function. It takes a variable number of parameters. Each parameter can be either a string containing the name of the variable, or an array of variable names. The arrays can be nested, `compact()` handles them recursively.
+
+`compact()` returns an array with all the variables in it.
+
+# Controllers
+Controllers are a bit like the bandleader, it controll who interacts with the __Model__ to create data for the __View__.
+
+## Setup
+We can controllers using the command:
+
+```
+php artisan make:controller <nameController> --resource
+```
+
+By convention the name of a controller starts with a capital letter followed by _Controller_, in one word.
+
+The `--resource` flag is used to initiate default methods when the controller is created.
+
+# Referencing route to a controller
+
+Lets take for example this route:
+
+```php
+use App\Http\Controllers\ArticleController;
+
+Route::get('/articles',[AuthController::class,'index']);
+```
+
+- `/articles` is the name of the route
+- `[AuthController::class, index]`, is the route which references the `AuthController` and assigns the index method.
