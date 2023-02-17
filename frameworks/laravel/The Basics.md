@@ -11,6 +11,8 @@
 	- [Referencing route to a controller](#referencing\route\to\a\controller)
 - [Migrations](#migrations)
 	- [The `up()` method](#the\up\(\)\method)
+- [Creating models](#creating\models)
+
 
 ---
 
@@ -153,3 +155,6 @@ We can create fields in a given table, by using the `$table` object and making a
         });
     }
 ```
+
+# Creating models
+We can create a model for a given migration by using the following command: `php artisan make:model Article`
