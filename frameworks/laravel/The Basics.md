@@ -18,9 +18,6 @@
 - [Components](#components)
 	- [Rendering components](#rendering\components)
 	- 
-
-
-
 ---
 
 # Files and Folders
@@ -47,15 +44,20 @@
 >Javascript files are added in the __public__ folder, if we wish to use sass or tailwind we have to go through [Laravel Mix](https://laravel.com/docs/10.x/mix#main-content)
 
 # Routes
-Routes are the main entrance of a Laravel application. When we create a route, we call its controller and a specific action. A list of all available routes can be seen with the following command: `php artisan route:list` 
+- Routes are the main entrance of a Laravel application.
+- When we create a route, we call its controller and a specific action.
+- A list of all available routes can be seen with the following command: `php artisan route:list` 
 
 ## Facades
-Facades provide a _static_ interface to classes that are available in the application's service container, Laravel ships with multiple facades that provide access to almost all of its features. They serve as _static proxies_ to underlying classes in the service container.
+- Facades provide a _static_ interface to classes that are available in the application's service container
+- Laravel ships with multiple facades that provide access to almost all of its features. 
+- They serve as _static proxies_ to underlying classes in the service container.
 
 ## HTTP Definition
-HTTP defines a set of request methods to indicate the desired action to be performed for a given resouce, they are sometimes reffered to as HTTP verbs. Each one of the them implements a different action however some common features are shared among them. A request method can be safe, ==idempotent==, or cacheable.
+- HTTP defines a set of request methods to indicate the desired action to be performed for a given resouce,
+- They are sometimes reffered to as HTTP verbs.
+- Each one of the them implements a different action however some common features are shared among them. A request method can be safe, ==idempotent==, or cacheable.
 
-## Example
 ```php
 // Display all the articles
 Route::get('/articles',function(){
@@ -102,9 +104,11 @@ Route::get('/hello/{name}',function($name){
 });
 ```
 
-As seen in the example above arguments are _transfered_ to a view using the `compact()` function. It takes a variable number of parameters. Each parameter can be either a string containing the name of the variable, or an array of variable names. The arrays can be nested, `compact()` handles them recursively.
-
-`compact()` returns an array with all the variables in it.
+- Arguments are _transfered_ to a view using the `compact()` function. 
+- The `compact()` takes a variable number of parameters. 
+	- Each parameter can be either a string containing the name of the variable, or an array of variable names.
+- The arrays can be nested, `compact()` handles them recursively.
+- `compact()` returns an array with all the variables in it.
 
 # Controllers
 Controllers are a bit like the bandleader, it controll who interacts with the __Model__ to create data for the __View__.
@@ -116,9 +120,8 @@ We can controllers using the command:
 php artisan make:controller <nameController> --resource
 ```
 
-By convention the name of a controller starts with a capital letter followed by _Controller_, in one word.
-
-The `--resource` flag is used to initiate default methods when the controller is created.
+- By convention the name of a controller starts with a capital letter followed by _Controller_, in one word.
+- The `--resource` flag is used to initiate default methods when the controller is created.
 
 # Referencing route to a controller
 
@@ -137,20 +140,21 @@ Route::get('/articles',[AuthController::class,'index']);
 
 >In the root of our directory there is a `.env` file where we can add details that we want to keep hidden, such as database credentials. Aftre altering the `.env` file we must reinitialize our app with the following command `php artisan config:clear`
 
-Migrations are a way to alter and update a database in a structured way instead of using something like _phpmyadmin_.
-
-To creat a migration we can use the artisan command:
+- Migrations are a way to alter and update a database in a structured way instead of using something like _phpmyadmin_.
+- To creat a migration we can use the artisan command:
 
 ```bash
 php artisan make:migration create_articles_table
 ```
 
-Migrations can be found at `database -> migrations`. In a migration file there two methods `up()` and `down()`:
-- `up()` is for running the migration
-- `down()` is for reversing the migration
+- Migrations can be found at `database -> migrations`.
+- In a migration file there two methods `up()` and `down()`:
+	- `up()` is for running the migration
+	- `down()` is for reversing the migration
 
 ## The `up()` method
-We can create fields in a given table, by using the `$table` object and making a call to a specific method. Example:
+We can create fields in a given table, by using the `$table` object and making a call to a specific method.
+
 ```php
   public function up()
     {
@@ -167,7 +171,8 @@ We can create fields in a given table, by using the `$table` object and making a
 We can create a model for a given migration by using the following command: `php artisan make:model Article`
 
 # Blade templates
-Blade is a simple and yet powerfull templating engine driven by view template inheritance and sections. This means that if blade doesn't provide a control structure we might need we can simply use plain PHP inside our Blade template.
+- Blade is a simple and yet powerfull templating engine driven by view template inheritance and sections. 
+- If blade doesn't provide a control structure we might need, we can simply use plain PHP inside our Blade template.
 
 ## Echoing data
 ```
@@ -225,7 +230,7 @@ Folder structure example:
 </html>
 ```
 
-In evrypage we create, we include the master layout. For example:
+In every page we create, we include the master layout
 ```
 @extends('layout.app')
 
