@@ -12,6 +12,13 @@
 - [Migrations](#migrations)
 	- [The `up()` method](#the\up\(\)\method)
 - [Creating models](#creating\models)
+- [Blade templates](#blade\templates)
+	- [Echoing data](#echoing\data)
+	- [Defining a master layout](#defining\a\master\layout)
+- [Components](#components)
+	- [Rendering components](#rendering\components)
+	- 
+
 
 
 ---
@@ -158,3 +165,115 @@ We can create fields in a given table, by using the `$table` object and making a
 
 # Creating models
 We can create a model for a given migration by using the following command: `php artisan make:model Article`
+
+# Blade templates
+Blade is a simple and yet powerfull templating engine driven by view template inheritance and sections. This means that if blade doesn't provide a control structure we might need we can simply use plain PHP inside our Blade template.
+
+## Echoing data
+```
+@php $name = "John"; @endphp
+<p>{{ $name }}</p>
+```
+
+## Blade loops
+
+```
+@for($i = 0; $i < 10; $i++)
+    <p>The current value is {{ $i }}</p>
+@endfor
+```
+
+```
+@foreach($posts as $post)
+    <p><{{ $post->title }}/p>
+@endforeach
+```
+
+```
+@while(true)
+    <p>Hi, I am a loop</p>
+@endwhie
+```
+
+## Defining a master layout
+Most web application follow the same layout, to avoid repetition we can create a master page which will be called every time a page will be created.
+
+Folder structure example:
+```
+|-resources
+    |-views
+        |-posts
+          index.blade.php   
+        |-layout
+          app.blade.php
+```
+
+```html
+<!-- resources/views/layout/app.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+</head>
+<body>
+    
+    @yield('content')
+
+</body>
+</html>
+```
+
+In evrypage we create, we include the master layout. For example:
+```
+@extends('layout.app')
+
+@section('title','My first page')
+
+@section('content')
+    <p>lorem ipsum...</p> 
+@endsection
+```
+
+# Components
+- Components and slots provide similar benefits to sections, components and includes
+- There are two ways to write components
+	- Classe based components
+	- Anonymous components
+- Class based components can be created using the `make:component` artisan command. For example if we wanted to create a simple `Alert` component, we could use the following command:
+
+```shell
+php artisan make:component Alert
+```
+
+- `make:component` will place the component in the `app/View/Components` directory.
+- When a component is created, a corresponding view template will be created. The view is placed in the `resources/views/components` directory.
+- Components can also be created within subdirectories:
+
+```shell
+php artisan make:component Forms/Input
+```
+
+>The snippet above creates an `Input` component in the `app/View/Components/Forms` directory and its corresponding view will be placed in the `resources/views/components/forms` directory.
+
+## Rendering components
+- A component can be displayed by using a Blade component tag within one of our Blade templates.
+- A Blade component tag stars with `x-` followed by the kebab case name of the component class.
+
+```
+<x-alert/>
+ 
+<x-user-profile/>
+```
+
+- To indicate directory nesting we can use the `.` character. For a component located at `app/View/Components/Inputs/Button.php`, we can reder it like so: `<x-inputs.button/>`
+
+## Passing Data To Components
+- Data can be passed using HTML attributes
+- Hard-coded primitive values may be passed using HTML attribute strings
+- PHP expressions and variables should be passed via attributes that use `:` character as prefix
+
+```
+<x-alert type="error" :message="$message"/>
+```
