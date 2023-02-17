@@ -9,8 +9,8 @@
 - [Controllers](#controllers)
 	- [Setup](#setup)
 	- [Referencing route to a controller](#referencing\route\to\a\controller)
-	- 
-	
+- [Migrations](#migrations)
+	- [The `up()` method](#the\up\(\)\method)
 
 ---
 
@@ -123,3 +123,33 @@ Route::get('/articles',[AuthController::class,'index']);
 
 - `/articles` is the name of the route
 - `[AuthController::class, index]`, is the route which references the `AuthController` and assigns the index method.
+
+# Migrations
+
+>In the root of our directory there is a `.env` file where we can add details that we want to keep hidden, such as database credentials. Aftre altering the `.env` file we must reinitialize our app with the following command `php artisan config:clear`
+
+Migrations are a way to alter and update a database in a structured way instead of using something like _phpmyadmin_.
+
+To creat a migration we can use the artisan command:
+
+```bash
+php artisan make:migration create_articles_table
+```
+
+Migrations can be found at `database -> migrations`. In a migration file there two methods `up()` and `down()`:
+- `up()` is for running the migration
+- `down()` is for reversing the migration
+
+## The `up()` method
+We can create fields in a given table, by using the `$table` object and making a call to a specific method. Example:
+```php
+  public function up()
+    {
+        Schema::create('articles', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
+        });
+    }
+```
