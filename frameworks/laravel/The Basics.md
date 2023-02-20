@@ -17,6 +17,7 @@
 	- [Defining a master layout](#defining\a\master\layout)
 - [Components](#components)
 	- [Rendering components](#rendering\components)
+	- [Passing data to components](#passing\data\to\components)
 	- [Casing](#casing)
 	- 
 ---
@@ -115,9 +116,9 @@ Route::get('/hello/{name}',function($name){
 Controllers are a bit like the bandleader, it controll who interacts with the __Model__ to create data for the __View__.
 
 ## Setup
-We can controllers using the command:
+We can create controllers using the command:
 
-```
+```shell
 php artisan make:controller <nameController> --resource
 ```
 
@@ -243,7 +244,7 @@ In every page we create, we include the master layout
 ```
 
 # Components
-- Components and slots provide similar benefits to sections, components and includes
+- Components and slots provide similar benefits to sections layouts and includes
 - There are two ways to write components
 	- Classe based components
 	- Anonymous components
@@ -254,7 +255,7 @@ php artisan make:component Alert
 ```
 
 - `make:component` will place the component in the `app/View/Components` directory.
-- When a component is created, a corresponding view template will be created. The view is placed in the `resources/views/components` directory.
+- When a component is created, a corresponding view template is created. The view is placed in the `resources/views/components` directory.
 - Components can also be created within subdirectories:
 
 ```shell
@@ -275,7 +276,7 @@ php artisan make:component Forms/Input
 
 - To indicate directory nesting we can use the `.` character. For a component located at `app/View/Components/Inputs/Button.php`, we can reder it like so: `<x-inputs.button/>`
 
-## Passing Data To Components
+## Passing data to components
 - Data can be passed using HTML attributes
 - Hard-coded primitive values may be passed using HTML attribute strings
 - PHP expressions and variables should be passed via attributes that use `:` character as prefix
@@ -357,6 +358,11 @@ public function __construct($alertType)
     $this->alertType = $alertType;
 }
 ```
+
 ```
 <x-alert alert-type="danger" />
 ```
+
+
+
+[Back to the top](#table\of\contents)
